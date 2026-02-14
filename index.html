@@ -2,21 +2,23 @@
 <html lang="th">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Valentine's Day Special 2026</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Happy Valentine's Day</title>
     <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;700&display=swap" rel="stylesheet">
     <style>
+        /* ตั้งค่าพื้นฐานรองรับมือถือ */
         html, body {
-            margin: 0 !important; padding: 0 !important;
-            width: 100vw; height: 100vh;
+            margin: 0; padding: 0;
+            width: 100%; height: 100%;
             overflow: hidden; background-color: #ffeff5;
             font-family: 'Mali', cursive;
+            touch-action: manipulation;
         }
 
-        /* 1. วิดีโอกุหลาบเต็มจอ */
+        /* วิดีโอกุหลาบเต็มจอ */
         #overlay-roses {
             position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; height: 100%;
             z-index: 999; transition: opacity 1.5s ease;
             cursor: pointer; background-color: #000;
         }
@@ -24,72 +26,73 @@
             width: 100%; height: 100%; object-fit: cover;
         }
 
-        /* กล่องเริ่มต้น Pulse Glow */
+        /* ปุ่ม Click ME กลางจอ */
         .click-hint {
             position: absolute; top: 50%; left: 50%;
             transform: translate(-50%, -50%); z-index: 1000;
-            background: rgba(255, 255, 255, 0.2); backdrop-filter: blur(10px);
-            padding: 20px 45px; border-radius: 50px;
-            font-size: 1.8rem; color: #fff;
+            background: rgba(255, 255, 255, 0.3); backdrop-filter: blur(8px);
+            padding: 15px 35px; border-radius: 50px;
+            font-size: 1.5rem; color: #fff;
             border: 2px solid rgba(255, 255, 255, 0.5);
-            box-shadow: 0 0 25px rgba(255, 77, 109, 0.6);
+            box-shadow: 0 0 20px rgba(255, 77, 109, 0.5);
             animation: pulseGlow 2s infinite;
-            pointer-events: none;
+            pointer-events: none; white-space: nowrap;
         }
         @keyframes pulseGlow {
             0%, 100% { transform: translate(-50%, -50%) scale(1); }
-            50% { transform: translate(-50%, -50%) scale(1.05); }
+            50% { transform: translate(-50%, -50%) scale(1.1); }
         }
 
-        /* 2. เนื้อหาจดหมายรัก */
+        /* ส่วนเนื้อหาหลัก */
         .main-content {
             position: fixed; top: 0; left: 0;
-            width: 100vw; height: 100vh;
+            width: 100%; height: 100%;
             display: flex; flex-direction: column;
             align-items: center; justify-content: center;
             z-index: 1;
         }
 
         #main-title {
-            color: #ff4d6d; font-size: 4rem;
+            color: #ff4d6d; font-size: 2.5rem;
             margin-bottom: 20px; transition: all 1s ease-in-out;
             text-shadow: 2px 2px 0px white;
+            text-align: center; width: 90%;
         }
         #main-title.move-up {
-            transform: translateY(-250px) scale(0.6);
+            transform: translateY(-20vh) scale(0.8);
         }
 
-        /* ปรับปรุงกล่องข้อความจากเรา */
+        /* กล่องจดหมายที่รองรับมือถือ */
         #message-box {
             opacity: 0; transform: translateY(50px);
             transition: all 0.8s ease;
             background: rgba(255, 255, 255, 0.95);
-            padding: 40px; border-radius: 30px;
+            padding: 25px; border-radius: 25px;
             border: 3px solid #ffb3c1;
-            box-shadow: 0 0 35px rgba(255, 182, 193, 0.7);
-            width: 450px; max-width: 90vw;
+            box-shadow: 0 0 30px rgba(255, 182, 193, 0.6);
+            width: 85%; max-width: 400px;
             text-align: center; visibility: hidden;
+            box-sizing: border-box;
         }
         #message-box.show {
-            opacity: 1; transform: translateY(-30px);
+            opacity: 1; transform: translateY(-5vh);
             visibility: visible;
         }
 
-        /* สไตล์ข้อความบอกรัก */
         .love-letter {
-            font-size: 1.3rem; line-height: 1.8;
-            color: #d63384; margin: 20px 0;
-            text-align: left;
+            font-size: 1.1rem; line-height: 1.6;
+            color: #d63384; margin: 15px 0;
+            text-align: left; max-height: 40vh; overflow-y: auto;
         }
 
         .btn-receive {
             background: #ff4d6d; color: white; border: none;
-            padding: 15px 40px; border-radius: 30px;
+            padding: 12px 30px; border-radius: 30px;
             cursor: pointer; font-family: 'Mali'; font-weight: bold;
-            font-size: 1.2rem; transition: 0.3s;
+            font-size: 1.1rem; transition: 0.3s; width: 100%;
         }
-        .btn-receive:hover { background: #ff758f; transform: scale(1.1); }
 
+        /* หัวใจลอย */
         .heart {
             position: fixed; bottom: -50px;
             animation: moveUp 4s linear infinite; z-index: 5;
@@ -98,33 +101,38 @@
             0% { transform: translateY(0) rotate(0deg); opacity: 1; }
             100% { transform: translateY(-110vh) rotate(360deg); opacity: 0; }
         }
+
+        /* ปรับขนาดพิเศษสำหรับมือถือจอเล็ก */
+        @media (max-width: 380px) {
+            #main-title { font-size: 2rem; }
+            .love-letter { font-size: 1rem; }
+        }
     </style>
 </head>
 <body onclick="handleGlobalClick()">
 
     <audio id="valentineMusic" loop>
-        <source src="No One Else - ปีนี้ไม่ต้องเหงาคนเดียวแล้วโว้ย _ (OFFICIAL MV).mp3" type="audio/mpeg">
+        <source src="music.mp3" type="audio/mpeg">
     </audio>
 
     <div id="overlay-roses">
-        <video autoplay muted loop id="rose-video">
+        <video autoplay muted loop playsinline id="rose-video">
             <source src="rose.mp4" type="video/mp4">
         </video>
-        <div class="click-hint">Click ME 🌹</div>
+        <div class="click-hint">แตะหน้าจอเพื่อรับเซอร์ไพรส์ 🌹</div>
     </div>
 
     <div class="main-content">
         <h1 id="main-title">Happy Valentine's Day! 💖</h1>
         <div id="message-box" onclick="event.stopPropagation()">
-            <h3 style="margin-top:0; color: #ff4d6d;">ความในใจจากบุคคลนิรนาม 📝</h3>
+            <h3 style="margin-top:0; color: #ff4d6d;">ความในใจจากผม 📝</h3>
             
             <div class="love-letter">
-                ถึงพี่ไหม ผมอยากจะบอกว่า <br><br>
+                ถึงพี่ไหม... <br><br>
                 ขอบคุณที่เข้ามาเป็นเรื่องราวดีๆ ในชีวิตนะ <br>
                 วันวาเลนไทน์ปีนี้ไม่มีอะไรจะให้นอกจากหัวใจ <br>
-                เเละขอโทษที่หายไปนาน เเค่ถอยออกมาเพราะรู้สึกสับสนเเต่ตอนที่ผมเข้าใจตัวเองเเล้ว 
-                ที่วันนั้นไม่รับของที่พี่ให้เพราะผมเกรงใจ พี่ให้ของผมเยอะเเล้วเเต่ผมไม่ได้ให้อะไรพี่กลับเลย❤️🌹 <br>
-                
+                เเละขอโทษที่หายไปนาน เเค่ถอยออกมาเพราะรู้สึกสับสนเเต่ตอนที่ผมเข้าใจตัวเองเเล้ว <br><br>
+                ที่วันนั้นไม่รับของที่พี่ให้เพราะผมเกรงใจ พี่ให้ของผมเยอะเเล้วเเต่ผมไม่ได้ให้อะไรพี่กลับเลย ❤️🌹
             </div>
 
             <button class="btn-receive" onclick="sendLove()">รับความรัก 🌹</button>
@@ -136,17 +144,21 @@
 
         function handleGlobalClick() {
             if (currentStep === 0) {
+                // เล่นเพลง (มือถือต้องคลิกก่อนเพลงถึงจะดัง)
                 const audio = document.getElementById('valentineMusic');
-                audio.play().catch(e => console.log("Audio fail"));
+                audio.play().catch(e => console.log("Audio play failed"));
 
+                // ซ่อนวิดีโอหน้าแรก
                 const overlay = document.getElementById('overlay-roses');
                 overlay.style.opacity = '0';
                 setTimeout(() => { overlay.style.display = 'none'; }, 1500);
                 
-                setInterval(createHeart, 150);
+                // เริ่มปล่อยหัวใจ
+                setInterval(createHeart, 200);
                 currentStep = 1;
             } 
             else if (currentStep === 1) {
+                // แสดงจดหมาย
                 document.getElementById('main-title').classList.add('move-up');
                 document.getElementById('message-box').classList.add('show');
                 currentStep = 2;
@@ -158,18 +170,17 @@
             heart.classList.add('heart');
             heart.innerHTML = (Math.random() > 0.3) ? '❤️' : '🌹';
             heart.style.left = Math.random() * 100 + "vw";
-            heart.style.fontSize = Math.random() * 25 + 15 + "px";
+            heart.style.fontSize = Math.random() * 20 + 15 + "px";
             heart.style.animationDuration = Math.random() * 2 + 3 + "s";
             document.body.appendChild(heart);
             setTimeout(() => heart.remove(), 4000);
         }
 
         function sendLove() {
-            // เมื่อกดรับความรัก หัวใจพุ่งกระจาย 50 ดวง
-            for (let i = 0; i < 50; i++) {
-                setTimeout(createHeart, i * 25);
+            for (let i = 0; i < 40; i++) {
+                setTimeout(createHeart, i * 30);
             }
-            alert('ได้รับความรักทั้งหมดไปแล้วนะ! ขอให้มีความสุขมากๆ ครับ ❤️');
+            alert('ส่งความรักไปให้พี่ไหมแล้วนะ! ❤️');
         }
     </script>
 </body>
